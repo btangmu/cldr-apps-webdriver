@@ -35,8 +35,8 @@ import com.google.gson.Gson;
  * Reference: https://unicode.org/cldr/trac/ticket/11488
  *   "Implement new Survey Tool automated test framework and infrastructure"
  *
- * This test has been used with the survey-driver project running in Eclipse. At the same time,
- * cldr-apps can be running either on localhost (in the same Eclipse as survey-driver) or on SmokeTest.
+ * This test has been used with the cldr-apps-webdriver project running in Eclipse. At the same time,
+ * cldr-apps can be running either on localhost (in the same Eclipse as cldr-apps-webdriver) or on SmokeTest.
  *
  * This code requires installing an implementation of WebDriver, such as chromedriver for Chrome.
  * On macOS, chromedriver can be installed from Terminal with brew as follows:
@@ -50,24 +50,24 @@ import com.google.gson.Gson;
  *
  * The Selenium jar files must be added to the Eclipse project. Download from
  * https://www.seleniumhq.org/download/ and unzip to get a folder like selenium-java-3.141.59.
- * In Eclipse, right-click on "survey-driver" and select Properties. Click on "Java Build Path".
+ * In Eclipse, right-click on "cldr-apps-webdriver" and select Properties. Click on "Java Build Path".
  * Click on the Libraries tab. Click on "Add External JARs". Navigate to the selenium folder and
  * add all the jar files outside the "lib" folder. Click on "Add External JARs" again and add all
  * the jar files inside "lib".
  *
  * For Gson, CLDR already includes cldr/tools/java/libs/gson.jar. Take advantage of that
- * and add it to Eclipse as follows: Right-click on "survey-driver" and select Properties.
+ * and add it to Eclipse as follows: Right-click on "cldr-apps-webdriver" and select Properties.
  * Click on "Java Build Path". Click on the Libraries tab. Click on "Add External JARs".
  * Navigate to cldr/tools/java/libs and select gson.jar.
  *
  * Setting up may require adding a specific set of test users to the db, consistent
  * with getNodeLoginQuery:
  *
- *     mysql cldrdb < survey-driver/scripts/cldr-add-webdrivers.sql
+ *     mysql cldrdb < cldr-apps-webdriver/scripts/cldr-add-webdrivers.sql
  *
  * and starting selenium grid:
  *
- *     sh survey-driver/scripts/selenium-grid-start.sh &
+ *     sh cldr-apps-webdriver/scripts/selenium-grid-start.sh &
  */
 public class SurveyDriver {
 	/*
@@ -197,7 +197,7 @@ public class SurveyDriver {
 	 * Clean up when finished testing.
 	 */
 	private void tearDown() {
-		System.out.println("survey-driver is quitting, goodbye from node on port " + nodePort);
+		System.out.println("cldr-apps-webdriver is quitting, goodbye from node on port " + nodePort);
 		if (driver != null) {
 			/*
 			 * This five-second sleep may not always be appropriate. It can help to see the browser for a few seconds
@@ -515,7 +515,7 @@ public class SurveyDriver {
 	 * localhost.
 	 *
 	 * Currently this set of users depends on running a mysql script on localhost or SmokeTest.
-	 * See scripts/cldr-add-webdrivers.sql, usage "mysql cldrdb < survey-driver/scripts/cldr-add-webdrivers.sql".
+	 * See scripts/cldr-add-webdrivers.sql, usage "mysql cldrdb < cldr-apps-webdriver/scripts/cldr-add-webdrivers.sql".
 	 *
 	 * Make sure users have permission to vote in their locales. Admin and TC users can vote in all locales,
 	 * so an easy way is to make them all TC or admin.
